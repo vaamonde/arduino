@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 23/01/2021
 # Data de atualização: 20/08/2021
-# Versão: 0.06
+# Versão: 0.07
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa e 20.2 Uma x64
 # Testado e homologado para a versão do Arduino IDE v1.8.x, BlockDuino e Fritzing v0.9.x
 #
@@ -67,8 +67,8 @@ clear
 #
 echo
 echo -e "Instalação do Arduino IDE, BlocklyDuino e do Fritzing no Linux Mint 20.x\n"
-echo -e "Após a instalação do Arduino IDE digitar no console ou localizar na busca indexada por: arduino.\n"
-echo -e "Após a instalação do Fritzing digitar no console ou localizar na busca indexada por: fritzing.\n"
+echo -e "Após a instalação do Arduino IDE digitar no console ou localizar na busca indexada por: Arduino IDE."
+echo -e "Após a instalação do Fritzing digitar no console ou localizar na busca indexada por: Fritzing.\n"
 echo -e "Aguarde, esse processo demora um pouco dependendo do seu Link de Internet...\n"
 echo -e "Será necessário digitar a senha do seu usuário que tem direitos administrativos do sudo.\n"
 sleep 5
@@ -105,7 +105,7 @@ sleep 5
 #
 echo -e "Instalando o Arduino IDE, BlocklyDuino e o Fritzing, aguarde...\n"
 #
-echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde...\n"
+echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde..."
 # opção do bloco de agrupamento "": Protege uma string, mas reconhece $, \ e ` como especiais
 # opção do bloco de agrupamento $(): Executa comandos numa subshell, retornando o resultado
 # opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
@@ -115,8 +115,8 @@ echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde...\n"
 # opção do operador relacional ==: Igual
 if [ "$(sudo lsusb | grep Arduino &>> $LOG ; echo $?)" == "0" ]
 	then
-		sudo lsusb | grep Arduino
-		echo -e "Arduino está conectado na Porta USB do seu computador.\n"
+		echo -e "Arduino: $(sudo lsusb | grep Arduino)"
+		echo -e "Arduino está conectado na Porta USB do seu computador."
 		echo -e "Pressione <Enter> para continuar o script.\n"
 		read
 		sleep 5
@@ -126,7 +126,7 @@ if [ "$(sudo lsusb | grep Arduino &>> $LOG ; echo $?)" == "0" ]
 		exit 1
 fi
 #
-echo -e "Verificando a conexão com a Porta Dialout do Arduino, aguarde...\n"
+echo -e "Verificando a conexão com a Porta Dialout do Arduino, aguarde..."
 # opção do bloco de agrupamento "": Protege uma string, mas reconhece $, \ e ` como especiais
 # opção do bloco de agrupamento $(): Executa comandos numa subshell, retornando o resultado
 # opção do comando ls: -l (listing), -h (human-readable)
@@ -137,16 +137,14 @@ echo -e "Verificando a conexão com a Porta Dialout do Arduino, aguarde...\n"
 # opção do caractere curinga *: Qualquer coisa
 if [ "$(sudo ls -lh /dev/ttyA* &>> $LOG ; echo $?)" == "0" ]
 	then
-		sudo ls -lh /dev/ttyACM*
-		echo -e "Conexão com a Porta Dialout do Arduino verificada com sucesso.\n"
+		echo -e "Conexão Dialout: $(sudo ls -lh /dev/ttyACM*)"
+		echo -e "Conexão com a Porta Dialout do Arduino verificada com sucesso!!!, continuando com o script..."
 		echo -e "Alterando as permissões da Porta Dialout para todos os usuários.\n"
 		# opção do comando chmod: -v (verbose) a (all users), + (added), r (read), w (write)
 		# opção do comando ls: -l (listing), -h (human-readable)
 		# opção do caractere curinga *: Qualquer coisa
-		sudo chmod -v a+rw /dev/ttyACM*
-		sudo ls -lh /dev/ttyACM*
-		echo
-		echo -e "Pressione <Enter> para continuar o script.\n"
+		echo -e "Permissões: $(sudo chmod -v a+rw /dev/ttyACM*)"
+		echo -e "Permissões alteradas com sucesso!!!, Pressione <Enter> para continuar o script.\n"
 		read
 		sleep 5
 	else
@@ -166,14 +164,15 @@ echo -e "Verificando o grupo de acesso ao Dialout do Arduino, aguarde...\n"
 # opção do operador relacional ==: Igual
 if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 	then
-		sudo cat /etc/group | grep dialout
-		echo -e "Grupo de acesso ao Dialout do Arduino verificado com sucesso.\n"
+		echo -e "Grupo Dialout: $(sudo cat /etc/group | grep dialout)"
+		echo -e "Grupo de acesso ao Dialout do Arduino verificado com sucesso!!.\n"
+		#
 		echo -e "Verificando os Membros efetivos dos grupos Dialout e Plugdev.\n"
 		# opção do comando members: -a (all)
 		echo -e "Grupo Dialout: $(sudo members -a dialout)"
 		echo -e "Grupo Plugdev: $(sudo members -a plugdev)"
 		echo
-		echo -e "Adicionando o usuário local: $USUARIO ou Grupo do Dialout.\n"
+		echo -e "Adicionando o usuário local: $USUARIO ou Grupo do Dialout, Plugdev, TTY e UUCP."
 		# opção do comando usermod: -a (append), -G (groups)
 		# opção do comando members: -a (all)
 		sudo usermod -a -G dialout $USUARIO
@@ -185,8 +184,7 @@ if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 		echo -e "Grupo TTY: $(sudo members -a tty)"
 		echo -e "Grupo UUCP: $(sudo members -a uucp)"
 		echo -e "Usuário $USUARIO: $(id)"
-		echo
-		echo -e "Pressione <Enter> para continuar o script.\n"
+		echo -e "Usuário adicionado com sucesso!!!, Pressione <Enter> para continuar o script.\n"
 		read
 		sleep 5
 	else
@@ -215,7 +213,7 @@ sleep 5
 #
 echo -e "Instalando o Arduino IDE utilizando o script do próprio Arduino, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
-	sudo bash /opt/arduino/install.sh
+	sudo bash /opt/arduino/install.sh &>> $LOG
 echo -e "Instalação do Arduino IDE feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #

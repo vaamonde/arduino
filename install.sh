@@ -116,8 +116,7 @@ echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde..."
 if [ "$(sudo lsusb | grep Arduino &>> $LOG ; echo $?)" == "0" ]
 	then
 		echo -e "Arduino: $(sudo lsusb | grep Arduino)"
-		echo -e "Arduino está conectado na Porta USB do seu computador."
-		echo -e "Pressione <Enter> para continuar o script.\n"
+		echo -e "Arduino está conectado na Porta USB do seu computador, Pressione <Enter> para continuar o script.\n"
 		read
 		sleep 5
 	else
@@ -138,8 +137,8 @@ echo -e "Verificando a conexão com a Porta Dialout do Arduino, aguarde..."
 if [ "$(sudo ls -lh /dev/ttyA* &>> $LOG ; echo $?)" == "0" ]
 	then
 		echo -e "Conexão Dialout: $(sudo ls -lh /dev/ttyACM*)"
-		echo -e "Conexão com a Porta Dialout do Arduino verificada com sucesso!!!, continuando com o script..."
-		echo -e "Alterando as permissões da Porta Dialout para todos os usuários.\n"
+		echo -e "Conexão com a Porta Dialout do Arduino verificada com sucesso!!!, continuando com o script...\n"
+		echo -e "Alterando as permissões da Porta Dialout para todos os usuários."
 		# opção do comando chmod: -v (verbose) a (all users), + (added), r (read), w (write)
 		# opção do comando ls: -l (listing), -h (human-readable)
 		# opção do caractere curinga *: Qualquer coisa
@@ -154,7 +153,7 @@ if [ "$(sudo ls -lh /dev/ttyA* &>> $LOG ; echo $?)" == "0" ]
 		exit 1
 fi
 #
-echo -e "Verificando o grupo de acesso ao Dialout do Arduino, aguarde...\n"
+echo -e "Verificando o grupo de acesso ao Dialout do Arduino, aguarde..."
 # opção do bloco de agrupamento "": Protege uma string, mas reconhece $, \ e ` como especiais
 # opção do bloco de agrupamento $(): Executa comandos numa subshell, retornando o resultado
 # opção do redirecionar |: Conecta a saída padrão com a entrada padrão de outro comando
@@ -167,7 +166,7 @@ if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 		echo -e "Grupo Dialout: $(sudo cat /etc/group | grep dialout)"
 		echo -e "Grupo de acesso ao Dialout do Arduino verificado com sucesso!!.\n"
 		#
-		echo -e "Verificando os Membros efetivos dos grupos Dialout e Plugdev.\n"
+		echo -e "Verificando os Membros efetivos dos grupos Dialout e Plugdev."
 		# opção do comando members: -a (all)
 		echo -e "Grupo Dialout: $(sudo members -a dialout)"
 		echo -e "Grupo Plugdev: $(sudo members -a plugdev)"
@@ -184,7 +183,7 @@ if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 		echo -e "Grupo TTY: $(sudo members -a tty)"
 		echo -e "Grupo UUCP: $(sudo members -a uucp)"
 		echo -e "Usuário $USUARIO: $(id)"
-		echo -e "Usuário adicionado com sucesso!!!, Pressione <Enter> para continuar o script.\n"
+		echo -e "Usuário adicionado os grupos com sucesso!!!, Pressione <Enter> para continuar o script.\n"
 		read
 		sleep 5
 	else

@@ -27,8 +27,8 @@ Vídeo mostrando os procedimentos básicos para instalar a versão do Arduino ID
 
 Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma linguagem de programação padrão, a qual tem origem em Wiring, e é essencialmente C/C++. O objetivo do projeto é criar ferramentas que são acessíveis, com baixo custo, flexíveis e fáceis de se usar por principiantes e profissionais. Principalmente para aqueles que não teriam alcance aos controladores mais sofisticados e ferramentas mais complicadas. 
 
- Site Oficial do Arduino IDE: https://www.arduino.cc/
- Site Oficial do BlocklyDuino IDE Plugin: https://github.com/BlocklyDuino/Block...
+ Site Oficial do Arduino IDE: https://www.arduino.cc/<br>
+ Site Oficial do BlocklyDuino IDE Plugin: https://github.com/BlocklyDuino/BlocklyDuino_IDE_plugin<br>
  Site Oficial do Fritzing: https://fritzing.org/
 
 [![Arduino IDE](http://img.youtube.com/vi/n9cRUE3io-Q/0.jpg)](https://www.youtube.com/watch?v=n9cRUE3io-Q "Arduino IDE")

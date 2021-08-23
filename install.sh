@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 23/01/2021
-# Data de atualização: 20/08/2021
-# Versão: 0.07
+# Data de atualização: 23/08/2021
+# Versão: 0.08
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa e 20.2 Uma x64
 # Testado e homologado para a versão do Arduino IDE v1.8.x, BlockDuino e Fritzing v0.9.x
 #
@@ -34,7 +34,21 @@
 # Site Oficial do BlocklyDuino IDE Plugin: https://github.com/BlocklyDuino/BlocklyDuino_IDE_plugin
 # Site Oficial do Fritzing: https://fritzing.org/
 #
-# Vídeo de instalação do Linux Mint 20.1 Ulyssa: https://www.youtube.com/watch?v=jhqmvgMQypo
+# Testando o Arduino:
+# 01. Arquivo
+#		Exemplos
+#			Exemplos embutidos
+#				01 Basics
+#					Blink
+#
+# 02. Ferramentas
+#		Placa
+#			Gerenciador de Placas
+#				Arduino Uno
+#		Porta
+#			Portas Seriais
+#				/dev/tty/ACM0
+#-> Carregar
 #
 # Variável da Data Inicial para calcular o tempo de execução do script (VARIÁVEL MELHORADA)
 # opção do comando date: +%T (Time)
@@ -70,7 +84,7 @@ echo -e "Instalação do Arduino IDE, BlocklyDuino e do Fritzing no Linux Mint 2
 echo -e "Após a instalação do Arduino IDE digitar no console ou localizar na busca indexada por: Arduino IDE."
 echo -e "Após a instalação do Fritzing digitar no console ou localizar na busca indexada por: Fritzing.\n"
 echo -e "Aguarde, esse processo demora um pouco dependendo do seu Link de Internet...\n"
-echo -e "Será necessário digitar a senha do seu usuário que tem direitos administrativos do sudo.\n"
+echo -e "Será necessário digitar a senha do seu usuário: $USUARIO que tem direitos administrativos do sudo.\n"
 sleep 5
 #
 echo -e "Atualizando o Sources List do Apt, aguarde..."
@@ -79,27 +93,27 @@ echo -e "Atualizando o Sources List do Apt, aguarde..."
 echo -e "Listas atualizadas com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Atualizando todo o sistema operacional do Linux Mint, aguarde..."
+echo -e "Atualizando o sistema operacional, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt -y upgrade &>> $LOG
-	sudo apt -y full-upgrade &>> $LOG
-	sudo apt -y dist-upgrade &>> $LOG
+	sudo apt upgrade -y &>> $LOG
+	sudo apt full-upgrade -y &>> $LOG
+	sudo apt dist-upgrade -y &>> $LOG
 echo -e "Sistema atualizado com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalando as dependências desse script do Arduino, aguarde..."
+echo -e "Instalando as dependências desse script, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt -y install members git vim &>> $LOG
+	sudo apt install -y members git vim &>> $LOG
 echo -e "Dependências instaladas com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Removendo os software desnecessários, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt -y autoremove &>> $LOG
-	sudo apt -y autoclean &>> $LOG
+	sudo apt autoremove -y &>> $LOG
+	sudo apt autoclean -y &>> $LOG
 echo -e "Software desnecessários removidos com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -116,7 +130,7 @@ echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde..."
 if [ "$(sudo lsusb | grep Arduino &>> $LOG ; echo $?)" == "0" ]
 	then
 		echo -e "Arduino: $(sudo lsusb | grep Arduino)"
-		echo -e "Arduino está conectado na Porta USB do seu computador, Pressione <Enter> para continuar o script.\n"
+		echo -e "Arduino está conectado na Porta USB do seu computador, Pressione <Enter> para continuar.\n"
 		read
 		sleep 5
 	else
@@ -138,12 +152,13 @@ if [ "$(sudo ls -lh /dev/ttyA* &>> $LOG ; echo $?)" == "0" ]
 	then
 		echo -e "Conexão Dialout: $(sudo ls -lh /dev/ttyACM*)"
 		echo -e "Conexão com a Porta Dialout do Arduino verificada com sucesso!!!, continuando com o script...\n"
-		echo -e "Alterando as permissões da Porta Dialout para todos os usuários."
+		#
+		echo -e "Alterando as permissões da Porta Dialout para todos os usuários, aguarde..."
 		# opção do comando chmod: -v (verbose) a (all users), + (added), r (read), w (write)
 		# opção do comando ls: -l (listing), -h (human-readable)
 		# opção do caractere curinga *: Qualquer coisa
 		echo -e "Permissões: $(sudo chmod -v a+rw /dev/ttyACM*)"
-		echo -e "Permissões alteradas com sucesso!!!, Pressione <Enter> para continuar o script.\n"
+		echo -e "Permissões alteradas com sucesso!!!, Pressione <Enter> para continuar.\n"
 		read
 		sleep 5
 	else
@@ -164,14 +179,15 @@ echo -e "Verificando o grupo de acesso ao Dialout do Arduino, aguarde..."
 if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 	then
 		echo -e "Grupo Dialout: $(sudo cat /etc/group | grep dialout)"
-		echo -e "Grupo de acesso ao Dialout do Arduino verificado com sucesso!!.\n"
+		echo -e "Grupo de acesso ao Dialout do Arduino verificado com sucesso!!!, continuando com o script....\n"
 		#
-		echo -e "Verificando os Membros efetivos dos grupos Dialout e Plugdev."
+		echo -e "Verificando os Membros efetivos dos grupos Dialout e Plugdev, aguarde..."
 		# opção do comando members: -a (all)
 		echo -e "Grupo Dialout: $(sudo members -a dialout)"
 		echo -e "Grupo Plugdev: $(sudo members -a plugdev)"
-		echo
-		echo -e "Adicionando o usuário local: $USUARIO ou Grupo do Dialout, Plugdev, TTY e UUCP."
+		echo -e "Membros efetivos dos grupos Dialout e Plugdev verificado com sucesso!!!, continuando com o script....\n"
+		#
+		echo -e "Adicionando o usuário local: $USUARIO nos grupos: Dialout, Plugdev, TTY e UUCP, aguarde..."
 		# opção do comando usermod: -a (append), -G (groups)
 		# opção do comando members: -a (all)
 		sudo usermod -a -G dialout $USUARIO
@@ -183,7 +199,7 @@ if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 		echo -e "Grupo TTY: $(sudo members -a tty)"
 		echo -e "Grupo UUCP: $(sudo members -a uucp)"
 		echo -e "Usuário $USUARIO: $(id)"
-		echo -e "Usuário adicionado os grupos com sucesso!!!, Pressione <Enter> para continuar o script.\n"
+		echo -e "Usuário adicionado nos grupos com sucesso!!!, Pressione <Enter> para continuar.\n"
 		read
 		sleep 5
 	else
@@ -233,7 +249,7 @@ sleep 5
 echo -e "Instalando o Fritzing, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt -y install fritzing &>> $LOG
+	sudo apt install -y fritzing &>> $LOG
 echo -e "Instalação do Fritzing feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #

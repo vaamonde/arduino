@@ -21,16 +21,18 @@ Link da Playlist:
 
 ![Arduino](arduino.png)
 
-## **INSTALAÇÃO do Arduino IDE no Linux Mint 20.2 Uma x64 Bits 🐧**
+## **INSTALAÇÃO do Arduino IDE no Linux Mint 20.2 Uma x64 Bits**
 
 Vídeo mostrando os procedimentos básicos para instalar a versão do Arduino IDE v1.8.x no Linux Mint 20.2 Uma x64 Bits
 
 Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma linguagem de programação padrão, a qual tem origem em Wiring, e é essencialmente C/C++. O objetivo do projeto é criar ferramentas que são acessíveis, com baixo custo, flexíveis e fáceis de se usar por principiantes e profissionais. Principalmente para aqueles que não teriam alcance aos controladores mais sofisticados e ferramentas mais complicadas. 
 
-Mais informações acesse: https://www.arduino.cc/
+ Site Oficial do Arduino IDE: https://www.arduino.cc/
+ Site Oficial do BlocklyDuino IDE Plugin: https://github.com/BlocklyDuino/Block...
+ Site Oficial do Fritzing: https://fritzing.org/
 
-[![Arduino IDE](http://img.youtube.com/vi//0.jpg)]( "Arduino IDE")
+[![Arduino IDE](http://img.youtube.com/vi/n9cRUE3io-Q/0.jpg)](https://www.youtube.com/watch?v=n9cRUE3io-Q "Arduino IDE")
 
-Link da vídeo aula: 
+Link da vídeo aula: https://www.youtube.com/watch?v=n9cRUE3io-Q
 
-Script utilizado nesse vídeo: 
+Script utilizado nesse vídeo: https://github.com/vaamonde/arduino/blob/main/install.sh

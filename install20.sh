@@ -69,7 +69,7 @@ LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 ARDUINO="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-beta.11_Linux_64bit.zip"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
 #
-# Script de instalação do Arduino IDE 2.0.x, e do Fritzing no Linux Mint 20.1 Ulyssa e 20.2 Uma 
+# Script de instalação do Arduino IDE 2.0.x e do Fritzing no Linux Mint 20.1 Ulyssa ou 20.2 Uma 
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
 # $0 (variável de ambiente do nome do comando)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)

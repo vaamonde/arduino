@@ -18,7 +18,7 @@ Github do Arduino: https://github.com/arduino<br>
 Site do Linux Mint: https://www.linuxmint.com/​<br>
 
 ## **Playlist do YouTUBE com todos os Vídeos do Arduino IDE no Linux Mint 20.x:**
-Link da Playlist: 
+Link da Playlist: https://www.youtube.com/playlist?list=PLozhsZB1lLUO6rSiDjyoc5nIlF99-ampo
 
 ![Arduino](arduino.png)
 

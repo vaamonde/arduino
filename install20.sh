@@ -4,11 +4,11 @@
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
-# Data de criação: 23/01/2021
+# Data de criação: 25/08/2021
 # Data de atualização: 25/08/2021
-# Versão: 0.09
+# Versão: 0.01
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa e 20.2 Uma x64
-# Testado e homologado para a versão do Arduino IDE v1.8.x, BlockDuino e Fritzing v0.9.x
+# Testado e homologado para a versão do Arduino IDE v2.0.x BETA e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
 # projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma 
@@ -19,11 +19,9 @@
 # placas compatíveis com Arduino, mas também, com a ajuda de núcleos de terceiros, outras 
 # placas de desenvolvimento de fornecedores.
 #
-# O BlocklyDuino é um editor de programação visual baseado na web para Arduino. BlocklyDuino 
-# é baseado no Blockly, o editor de programação gráfica baseado na web. Fornece blocos de 
-# linguagem de tipo estático e geradores de código para programação em Arduino. O BlocklyDuino 
-# também oferece suporte aos blocos Grove para iniciar facilmente a experimentação e o 
-# aprendizado baseados em microcontroladores.
+# A nova versão principal do IDE do Arduino é mais rápida e ainda mais poderosa! Além de 
+# um editor mais moderno e uma interface mais ágil, possui preenchimento automático, 
+# navegação de código e até mesmo um depurador ao vivo.
 #
 # O Fritzing é uma iniciativa de código aberto para desenvolver um software tipo CAD amador 
 # para design de hardware eletrônico, para apoiar designers e artistas prontos para deixar 
@@ -31,8 +29,9 @@
 # Circuito Impresso. 
 #
 # Site Oficial do Arduino IDE: https://www.arduino.cc/
-# Site Oficial do BlocklyDuino IDE Plugin: https://github.com/BlocklyDuino/BlocklyDuino_IDE_plugin
 # Site Oficial do Fritzing: https://fritzing.org/
+#
+# Vídeo de instalação da versão do Arduino IDE 1.8.x: 
 #
 # Testando o Arduino:
 # 01. Arquivo
@@ -66,12 +65,11 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE, BlocklyDuino e do Fritzing (Links atualizados no dia 23/01/2021)
-ARDUINO="https://downloads.arduino.cc/arduino-1.8.15-linux64.tar.xz"
-BLOCKLYDUINO="https://github.com/BlocklyDuino/BlocklyDuino_IDE_plugin"
+# Declarando as variáveis de download do Arduino IDE e do Fritzing (Links atualizados no dia 25/08/2021)
+ARDUINO="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-beta.11_Linux_64bit.zip"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
 #
-# Script de instalação do Arduino IDE, BlocklyDuino e do Fritzing no Linux Mint 20.1 Ulyssa e 20.2 Uma 
+# Script de instalação do Arduino IDE 2.0.x, e do Fritzing no Linux Mint 20.1 Ulyssa e 20.2 Uma 
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
 # $0 (variável de ambiente do nome do comando)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
@@ -80,9 +78,9 @@ echo -e "Início do script $0 em: $(date +%d/%m/%Y-"("%H:%M")")\n" &>> $LOG
 clear
 #
 echo
-echo -e "Instalação do Arduino IDE, BlocklyDuino e do Fritzing no Linux Mint 20.x\n"
-echo -e "Após a instalação do Arduino IDE digitar no console ou localizar na busca indexada por: Arduino IDE."
-echo -e "Após a instalação do Fritzing digitar no console ou localizar na busca indexada por: Fritzing.\n"
+echo -e "Instalação do Arduino IDE 2.0 BETA e do Fritzing no Linux Mint 20.x\n"
+echo -e "Após a instalação do Arduino IDE digitar no console: arduino-20"
+echo -e "Após a instalação do Fritzing localizar na busca indexada por: Fritzing.\n"
 echo -e "Aguarde, esse processo demora um pouco dependendo do seu Link de Internet...\n"
 echo -e "Será necessário digitar a senha do seu usuário: $USUARIO que tem direitos administrativos do sudo.\n"
 sleep 5
@@ -117,7 +115,7 @@ echo -e "Removendo os software desnecessários, aguarde..."
 echo -e "Software desnecessários removidos com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalando o Arduino IDE, BlocklyDuino e o Fritzing, aguarde...\n"
+echo -e "Instalando o Arduino IDE 2.0 e do Fritzing, aguarde...\n"
 #
 echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde..."
 # opção do bloco de agrupamento "": Protege uma string, mas reconhece $, \ e ` como especiais
@@ -210,10 +208,10 @@ if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 		exit 1
 fi
 #
-echo -e "Fazendo o download do Arduino IDE do site Oficial, aguarde..."
+echo -e "Fazendo o download do Arduino IDE 2.0 BETA do site Oficial, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando wget: -v (verbose), -O (output-document)
-	sudo wget -v -O /tmp/arduino.tar.xz $ARDUINO &>> $LOG
+	sudo wget -v -O /tmp/arduino20.tar.xz $ARDUINO &>> $LOG
 echo -e "Download do Arduino IDE do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -222,30 +220,17 @@ echo -e "Descompactando o Arduino IDE no diretório: /opt/arduino, aguarde..."
 	# opção do comando tar: -J (xz), -x (extract), v (verbose), -f (file)
 	# opção do comando mv: -v (verbose)
 	cd /tmp
-		sudo tar -Jxvf arduino.tar.xz &>> $LOG
-		sudo mv -v arduino-*/ /opt/arduino &>> $LOG
+		sudo tar -Jxvf arduino20.tar.xz &>> $LOG
+		sudo mv -v arduino-*/ /opt/arduino20 &>> $LOG
 	cd - &>> $LOG
 echo -e "Descompactação do Arduino IDE no diretório /opt/arduino feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalando o Arduino IDE utilizando o script do próprio Arduino, aguarde..."
+echo -e "Criando o Link Simbólico do Arduino IDE 2.0 BETA no diretório: /bin, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
-	sudo bash /opt/arduino/install.sh &>> $LOG
-echo -e "Instalação do Arduino IDE feito com sucesso!!!, continuando com o script...\n"
-sleep 5
-#
-echo -e "Clonando o projeto do BlocklyDuino do Github, aguarde..."
-	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
-	sudo git clone $BLOCKLYDUINO /tmp/blocklyduino &>> $LOG
-echo -e "Projeto do BlocklyDuino clonado com sucesso!!!, continuando com o script...\n"
-sleep 5
-#
-echo -e "Adicionando o BlocklyDuino nas ferramentas do Arduino IDE, aguarde..."
-	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
-	# opção do comando mv: -v (verbose)
-	# opção do caractere curinga *: Qualquer coisa
-	sudo mv -v /tmp/blocklyduino/BlocklyDuinoPlugin/tool/* /opt/arduino/tools/ &>> $LOG
-echo -e "BlocklyDuino adicionado com sucesso!!!, continuando com o script...\n"
+	# opção do comando ln: -s (symbolic), -v (verbose)
+	sudo ln -sv /opt/arduino20/arduino-ide /bin/arduino-20 &>> $LOG
+echo -e "Link Simbólico do Arduino IDE feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Instalando o Fritzing, aguarde..."
@@ -261,7 +246,7 @@ echo -e "Clonando o projeto do Fritzing Parts do Github, aguarde..."
 echo -e "Projeto do Fritzing Parts clonado com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalação do Arduino IDE, BlocklyDuino e do Fritzing feita com Sucesso!!!."
+echo -e "Instalação do Arduino IDE 2.0 BETA e do Fritzing feita com Sucesso!!!."
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)
 	HORAFINAL=$(date +%T)

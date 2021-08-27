@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
 # Data de atualização: 25/08/2021
-# Versão: 0.01
+# Versão: 0.02
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa e 20.2 Uma x64
 # Testado e homologado para a versão do Arduino IDE v2.0.x BETA e Fritzing v0.9.x
 #
@@ -31,7 +31,7 @@
 # Site Oficial do Arduino IDE: https://www.arduino.cc/
 # Site Oficial do Fritzing: https://fritzing.org/
 #
-# Vídeo de instalação da versão do Arduino IDE 1.8.x: 
+# Vídeo de instalação da versão do Arduino IDE 1.8.x: https://www.youtube.com/watch?v=n9cRUE3io-Q
 #
 # Testando o Arduino:
 # 01. Arquivo
@@ -215,7 +215,7 @@ echo -e "Fazendo o download do Arduino IDE 2.0 BETA do site Oficial, aguarde..."
 echo -e "Download do Arduino IDE do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Descompactando o Arduino IDE no diretório: /opt/arduino, aguarde..."
+echo -e "Descompactando o Arduino IDE 2.0 BETA no diretório: /opt/arduino20, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando tar: -J (xz), -x (extract), v (verbose), -f (file)
 	# opção do comando mv: -v (verbose)

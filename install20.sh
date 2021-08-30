@@ -103,7 +103,7 @@ sleep 5
 echo -e "Instalando as dependências desse script, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt install -y members git vim &>> $LOG
+	sudo apt install -y members git vim unzip &>> $LOG
 echo -e "Dependências instaladas com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -211,16 +211,15 @@ fi
 echo -e "Fazendo o download do Arduino IDE 2.0 BETA do site Oficial, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando wget: -v (verbose), -O (output-document)
-	sudo wget -v -O /tmp/arduino20.tar.xz $ARDUINO &>> $LOG
+	sudo wget -v -O /tmp/arduino20.zip $ARDUINO &>> $LOG
 echo -e "Download do Arduino IDE do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Descompactando o Arduino IDE 2.0 BETA no diretório: /opt/arduino20, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
-	# opção do comando tar: -J (xz), -x (extract), v (verbose), -f (file)
 	# opção do comando mv: -v (verbose)
 	cd /tmp
-		sudo tar -Jxvf arduino20.tar.xz &>> $LOG
+		sudo unzip arduino20.zip &>> $LOG
 		sudo mv -v arduino-*/ /opt/arduino20 &>> $LOG
 	cd - &>> $LOG
 echo -e "Descompactação do Arduino IDE no diretório /opt/arduino feito com sucesso!!!, continuando com o script...\n"

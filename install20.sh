@@ -33,21 +33,31 @@
 #
 # Vídeo de instalação da versão do Arduino IDE 1.8.x: https://www.youtube.com/watch?v=n9cRUE3io-Q
 #
-# Testando o Arduino:
-# 01. Arquivo
-#		Exemplos
-#			Exemplos embutidos
-#				01 Basics
-#					Blink
+# OBSERVAÇÃO IMPORTANTE: Nesse vídeo utilizei os conceitos do Git para clonar o projeto no Linux Mint
+# Ctrl+Alt+t (Atalho do Terminal)
+#		git clone https://github.com/vaamonde/arduino
+#			cd arduino/
+#				bash install20.sh
 #
-# 02. Ferramentas
-#		Placa
-#			Gerenciador de Placas
-#				Arduino Uno
-#		Porta
-#			Portas Seriais
-#				/dev/tty/ACM0
-#-> Carregar
+# Terminal
+#		arduino-20
+#
+# Arduino IDE 2.0.0 BETA 11
+#	no board selected
+#		Arduino Uno at /dev/ttyACM0
+# 			Arduino AVR Boards [v1.8.3] - (Yes)
+#
+# Arduino IDE 2.0.0 BETA 11
+#	Tools
+#		Board "Arduino Uno"
+#		Port: "/dev/ttyACM0"
+#		Get Board Info
+#
+# File
+#	Examples
+#		01. Basics
+#			Blink
+#				Upload
 #
 # Variável da Data Inicial para calcular o tempo de execução do script (VARIÁVEL MELHORADA)
 # opção do comando date: +%T (Time)

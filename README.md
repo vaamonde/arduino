@@ -50,8 +50,8 @@ Site Oficial do Arduino IDE: https://www.arduino.cc/<br>
 Github Oficial do Arduino IDE 2.0 BETA: https://github.com/arduino/arduino-ide<br>
 Site Oficial do Fritzing: https://fritzing.org/
 
-[![Arduino IDE 2.0](http://img.youtube.com/vi//0.jpg)]("Arduino IDE 2.0")
+[![Arduino IDE 2.0](http://img.youtube.com/vi/0K0Fg_WnO9s/0.jpg)](https://www.youtube.com/watch?v=0K0Fg_WnO9s "Arduino IDE 2.0")
 
-Link da vídeo aula: 
+Link da vídeo aula: https://www.youtube.com/watch?v=0K0Fg_WnO9s
 
 Script utilizado nesse vídeo: https://github.com/vaamonde/arduino/blob/main/install20.sh

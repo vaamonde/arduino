@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 25/08/2021
-# Versão: 0.02
+# Data de atualização: 30/08/2021
+# Versão: 0.03
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa e 20.2 Uma x64
 # Testado e homologado para a versão do Arduino IDE v2.0.x BETA e Fritzing v0.9.x
 #
@@ -229,7 +229,9 @@ sleep 5
 echo -e "Criando o Link Simbólico do Arduino IDE 2.0 BETA no diretório: /bin, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando ln: -s (symbolic), -v (verbose)
+	# opção do comando cp: -R (recursive), -f (force), -v (verbose)
 	sudo ln -sv /opt/arduino20/arduino-ide /bin/arduino-20 &>> $LOG
+	sudo cp -Rfv icons/ /opt/arduino20/ &>> $LOG
 echo -e "Link Simbólico do Arduino IDE feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #

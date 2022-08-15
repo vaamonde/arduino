@@ -5,9 +5,9 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 23/01/2021
-# Data de atualização: 25/08/2021
-# Versão: 0.09
-# Testado e homologado para a versão do Linux Mint 20.1 Ulyssa e 20.2 Uma x64
+# Data de atualização: 15/08/2022
+# Versão: 0.11
+# Testado e homologado para a versão do Linux Mint 20.1 Ulyssa, 20.2 Uma, 203. Una  x64
 # Testado e homologado para a versão do Arduino IDE v1.8.x, BlockDuino e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
@@ -66,8 +66,8 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE, BlocklyDuino e do Fritzing (Links atualizados no dia 23/01/2021)
-ARDUINO="https://downloads.arduino.cc/arduino-1.8.15-linux64.tar.xz"
+# Declarando as variáveis de download do Arduino IDE, BlocklyDuino e do Fritzing (Links atualizados no dia 10/06/2022)
+ARDUINO="https://downloads.arduino.cc/arduino-1.8.19-linux64.tar.xz"
 BLOCKLYDUINO="https://github.com/BlocklyDuino/BlocklyDuino_IDE_plugin"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
 #

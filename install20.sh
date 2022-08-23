@@ -38,6 +38,10 @@
 #
 # Site Oficial do Arduino IDE: https://www.arduino.cc/
 # Projeto do Github do Arduino IDE 2.x: https://github.com/arduino/arduino-ide
+# Site Oficial do Arduino Cloud: https://cloud.arduino.cc/
+# Site Oficial do Arduino Web Editor: https://create.arduino.cc
+# Site Oficial do Arduino IoT: https://create.arduino.cc/iot/things
+# Site Oficial do Arduino Profile: https://id.arduino.cc/
 # Site Oficial do Fritzing: https://fritzing.org/
 #
 # OBSERVAÇÃO IMPORTANTE: Nesse vídeo utilizei os conceitos do Git e Github para clonar o 

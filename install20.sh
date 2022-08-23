@@ -5,10 +5,10 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 22/08/2022
-# Versão: 0.07
+# Data de atualização: 23/08/2022
+# Versão: 0.08
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa, 20.2 Uma e 20.3 Una x64
-# Testado e homologado para a versão do Arduino IDE v2.0.x e Fritzing v0.9.x
+# Testado e homologado para a versão do Arduino IDE v2.0.x, Cli v0.26.x e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
 # projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma 
@@ -23,6 +23,14 @@
 # um editor mais moderno e uma interface mais ágil, possui preenchimento automático, 
 # navegação de código e até mesmo um depurador ao vivo.
 #
+# Aplicação Arduino CLI (Interface de Linha de Comando). A solução tudo-em-um para codificar, 
+# compilar e fazer upload de códigos para suas placas Arduino usando o prompt de comando 
+# (Windows) e o Terminal (Linux e MAC).
+#
+# O Arduino Create é uma plataforma online que permite que makers e desenvolvedores possam 
+# compartilhar códigos/projetos, configurar suas placas, usar a IDE online, conectar 
+# dispositivos na Arduino Iot Cloud, acessar tutoriais, e várias outras funcionalidades!
+#
 # O Fritzing é uma iniciativa de código aberto para desenvolver um software tipo CAD amador 
 # para design de hardware eletrônico, para apoiar designers e artistas prontos para deixar 
 # de experimentar um protótipo e construir um circuito mais permanente com uma Placa de 
@@ -32,10 +40,11 @@
 # Projeto do Github do Arduino IDE 2.x: https://github.com/arduino/arduino-ide
 # Site Oficial do Fritzing: https://fritzing.org/
 #
-# Vídeo de instalação da versão do Arduino IDE 1.8.x: https://www.youtube.com/watch?v=n9cRUE3io-Q
+# OBSERVAÇÃO IMPORTANTE: Nesse vídeo utilizei os conceitos do Git e Github para clonar o 
+# projeto no Linux Mint
 #
-# OBSERVAÇÃO IMPORTANTE: Nesse vídeo utilizei os conceitos do Git para clonar o projeto no Linux Mint
 # Ctrl+Alt+t (Atalho do Terminal)
+#		sudo apt install git
 #		git clone https://github.com/vaamonde/arduino
 #			cd arduino/
 #				bash install20.sh
@@ -54,6 +63,11 @@
 #		01. Basics
 #			Blink
 #				Upload
+#
+# Terminal
+#	arduino-cli
+#		arduino-cli version
+#		arduino-cli board list
 #
 # Variável da Data Inicial para calcular o tempo de execução do script (VARIÁVEL MELHORADA)
 # opção do comando date: +%T (Time)
@@ -88,8 +102,10 @@ echo -e "Início do script $0 em: $(date +%d/%m/%Y-"("%H:%M")")\n" &>> $LOG
 clear
 #
 echo
-echo -e "Instalação do Arduino IDE 2.x e do Fritzing no Linux Mint 20.x\n"
+echo -e "Instalação do Arduino IDE 2.x, Cli e do Fritzing no Linux Mint 20.x\n"
 echo -e "Após a instalação do Arduino IDE digitar no console: arduino-20"
+echo -e "Após a instalação do Arduino Cli digitar no console: arduino-cli"
+echo -e "Após a instalação do Arduino Agent Cloud acessar a URL: https://create.arduino.cc/getting-started/plugin/welcome"
 echo -e "Após a instalação do Fritzing localizar na busca indexada por: Fritzing.\n"
 echo -e "Aguarde, esse processo demora um pouco dependendo do seu Link de Internet...\n"
 echo -e "Será necessário digitar a senha do seu usuário: $USUARIO que tem direitos administrativos do sudo.\n"
@@ -125,7 +141,8 @@ echo -e "Removendo os software desnecessários, aguarde..."
 echo -e "Software desnecessários removidos com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalando o Arduino IDE 2.x e do Fritzing, aguarde...\n"
+echo -e "Instalando o Arduino IDE 2.x, Cli, Cloud e do Fritzing, aguarde...\n"
+sleep 5
 #
 echo -e "Verificando a conexão com a Porta TTY (USB) do Arduino, aguarde..."
 # opção do bloco de agrupamento "": Protege uma string, mas reconhece $, \ e ` como especiais
@@ -218,7 +235,7 @@ if [ "$(sudo cat /etc/group | grep dialout &>> $LOG ; echo $?)" == "0" ]
 		exit 1
 fi
 #
-echo -e "Fazendo o download do Arduino IDE 2.x do site Oficial, aguarde..."
+echo -e "Fazendo o download do Arduino IDE 2.x e Cli do site Oficial, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando wget: -v (verbose), -O (output-document)
 	sudo wget -v -O /tmp/arduino20.zip $ARDUINOIDE &>> $LOG
@@ -243,7 +260,7 @@ echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, agu
 	cd /tmp
 		sudo unzip arduino20.zip &>> $LOG
 		sudo mv -v arduino-*/ $PATHARDUINO &>> $LOG
-		sudo tar -zxvf arduinocli.tar.gz $ARDUINOCLI &>> $LOG
+		sudo tar -zxvf arduinocli.tar.gz &>> $LOG
 		sudo mv -v arduino-cli $PATHARDUINO &>> $LOG
 	cd - &>> $LOG
 echo -e "Descompactação do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
@@ -267,14 +284,14 @@ echo -e "Instalando o Arduino Agent Cloud Chrome, aguarde..."
 echo -e "Instalação do Arduino Agent Cloud Chrome feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Criando o Link Simbólico do Arduino IDE 2.x e Cli no diretório: /bin, aguarde..."
+echo -e "Criando os Links Simbólicos do Arduino IDE 2.x e Cli no diretório: /usr/local/bin/, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando ln: -s (symbolic), -v (verbose)
 	# opção do comando cp: -R (recursive), -f (force), -v (verbose)
-	sudo ln -sv $PATHARDUINO/arduino-ide /usr/local/arduino-20 &>> $LOG
-	sudo ln -sv $PATHARDUINO/arduino-cli /usr/local/arduino-cli &>> $LOG
+	sudo ln -sv $PATHARDUINO/arduino-ide /usr/local/bin/arduino-20 &>> $LOG
+	sudo ln -sv $PATHARDUINO/arduino-cli /usr/local/bin/arduino-cli &>> $LOG
 	sudo cp -Rfv icons/ $PATHARDUINO &>> $LOG
-echo -e "Link Simbólico do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
+echo -e "Links Simbólicos do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Instalando o Fritzing, aguarde..."
@@ -290,7 +307,7 @@ echo -e "Clonando o projeto do Fritzing Parts do Github, aguarde..."
 echo -e "Projeto do Fritzing Parts clonado com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalação do Arduino IDE 2.x, Cli e do Fritzing feita com Sucesso!!!"
+echo -e "Instalação do Arduino IDE 2.x, Cli, Cloud e do Fritzing feita com Sucesso!!!"
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)
 	HORAFINAL=$(date +%T)

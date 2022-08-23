@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
 # Data de atualização: 22/08/2022
-# Versão: 0.06
+# Versão: 0.07
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa, 20.2 Uma e 20.3 Una x64
 # Testado e homologado para a versão do Arduino IDE v2.0.x e Fritzing v0.9.x
 #
@@ -71,11 +71,13 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE e do Fritzing (Links atualizados no dia 22/08/2022)
-ARDUINO="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc9.2_Linux_64bit.zip"
+# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 22/08/2022)
+ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc9.2_Linux_64bit.zip"
+ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
 AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.6/ArduinoCreateAgent-1.2.6-linux-amd64-installer-firefox.run"
 AGENTCHROME="https://github.com/arduino/arduino-create-agent/releases/download/1.2.6/ArduinoCreateAgent-1.2.6-linux-amd64-installer-chrome.run"
+PATHARDUINO="/opt/arduino20"
 #
 # Script de instalação do Arduino IDE 2.0.x e do Fritzing no Linux Mint 20.1 Ulyssa, 20.2 Uma ou 20.3 Una 
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
@@ -219,7 +221,8 @@ fi
 echo -e "Fazendo o download do Arduino IDE 2.x do site Oficial, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando wget: -v (verbose), -O (output-document)
-	sudo wget -v -O /tmp/arduino20.zip $ARDUINO &>> $LOG
+	sudo wget -v -O /tmp/arduino20.zip $ARDUINOIDE &>> $LOG
+	sudo wget -v -O /tmp/arduinocli.tar.gz $ARDUINOCLI &>> $LOG
 echo -e "Download do Arduino IDE 2.x do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -230,17 +233,20 @@ echo -e "Fazendo o download do Arduino Agent Cloud do site Oficial, aguarde..."
 	sudo wget -v -O /tmp/firefox.run $AGENTFIREFOX &>> $LOG
 	sudo wget -v -O /tmp/chrome.run $AGENTCHROME &>> $LOG
 	sudo chmod -v +x /tmp/*.run &>> $LOG
-echo -e "Download do Arduino Agent Cloud do site Oficial feito com sucesso!!!, continuando com o script...\n"
+echo -e "Download do Arduino Agent Cloud feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Descompactando o Arduino IDE 2.x no diretório: /opt/arduino20, aguarde..."
+echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando mv: -v (verbose)
+	# opção do comando tar: -z (gzip), -x (extract), -v (verbose), -f (file)
 	cd /tmp
 		sudo unzip arduino20.zip &>> $LOG
-		sudo mv -v arduino-*/ /opt/arduino20 &>> $LOG
+		sudo mv -v arduino-*/ $PATHARDUINO &>> $LOG
+		sudo tar -zxvf arduinocli.tar.gz $ARDUINOCLI &>> $LOG
+		sudo mv -v arduino-cli $PATHARDUINO &>> $LOG
 	cd - &>> $LOG
-echo -e "Descompactação do Arduino IDE 2.x no diretório /opt/arduino20 feito com sucesso!!!, continuando com o script...\n"
+echo -e "Descompactação do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Instalando o Arduino Agent Cloud Firefox, aguarde..."
@@ -249,25 +255,26 @@ echo -e "Instalando o Arduino Agent Cloud Firefox, aguarde..."
 	cd /tmp
 		./firefox.run
 	cd - &>> $LOG
-echo -e "Instalando o Arduino Agent Cloud Firefox feito com sucesso!!!, continuando com o script...\n"
+echo -e "Instalação do Arduino Agent Cloud Firefox feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalando o Arduino Agent Cloud Google Chrome, aguarde..."
+echo -e "Instalando o Arduino Agent Cloud Chrome, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando mv: -v (verbose)
 	cd /tmp
 		./chrome.run
 	cd - &>> $LOG
-echo -e "Instalando o Arduino Agent Cloud Google Chrome feito com sucesso!!!, continuando com o script...\n"
+echo -e "Instalação do Arduino Agent Cloud Chrome feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Criando o Link Simbólico do Arduino IDE 2.x no diretório: /bin, aguarde..."
+echo -e "Criando o Link Simbólico do Arduino IDE 2.x e Cli no diretório: /bin, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando ln: -s (symbolic), -v (verbose)
 	# opção do comando cp: -R (recursive), -f (force), -v (verbose)
-	sudo ln -sv /opt/arduino20/arduino-ide /bin/arduino-20 &>> $LOG
-	sudo cp -Rfv icons/ /opt/arduino20/ &>> $LOG
-echo -e "Link Simbólico do Arduino IDE 2.x feito com sucesso!!!, continuando com o script...\n"
+	sudo ln -sv $PATHARDUINO/arduino-ide /usr/local/arduino-20 &>> $LOG
+	sudo ln -sv $PATHARDUINO/arduino-cli /usr/local/arduino-cli &>> $LOG
+	sudo cp -Rfv icons/ $PATHARDUINO &>> $LOG
+echo -e "Link Simbólico do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Instalando o Fritzing, aguarde..."
@@ -283,7 +290,7 @@ echo -e "Clonando o projeto do Fritzing Parts do Github, aguarde..."
 echo -e "Projeto do Fritzing Parts clonado com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalação do ArduinoIDE 2.x e do Fritzing feita com Sucesso!!!."
+echo -e "Instalação do Arduino IDE 2.x, Cli e do Fritzing feita com Sucesso!!!"
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)
 	HORAFINAL=$(date +%T)

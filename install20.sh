@@ -129,7 +129,7 @@ sleep 5
 echo -e "Instalando as dependências desse script, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt install -y members git vim unzip &>> $LOG
+	sudo apt install -y members git vim unzip python python2 python3 &>> $LOG
 echo -e "Dependências instaladas com sucesso!!!, continuando com o script...\n"
 sleep 5
 #

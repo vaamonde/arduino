@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 15/08/2022
-# Versão: 0.05
+# Data de atualização: 22/08/2022
+# Versão: 0.06
 # Testado e homologado para a versão do Linux Mint 20.1 Ulyssa, 20.2 Uma e 20.3 Una x64
 # Testado e homologado para a versão do Arduino IDE v2.0.x e Fritzing v0.9.x
 #
@@ -44,11 +44,6 @@
 #		arduino-20
 #
 # Arduino IDE 2.0.x
-#	no board selected
-#		Arduino Uno at /dev/ttyACM0
-# 			Arduino AVR Boards [v1.8.3] - (Yes)
-#
-# Arduino IDE 2.0.x
 #	Tools
 #		Board "Arduino Uno"
 #		Port: "/dev/ttyACM0"
@@ -76,9 +71,11 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE e do Fritzing (Links atualizados no dia 15/08/2022)
+# Declarando as variáveis de download do Arduino IDE e do Fritzing (Links atualizados no dia 22/08/2022)
 ARDUINO="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc9.2_Linux_64bit.zip"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
+AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.6/ArduinoCreateAgent-1.2.6-linux-amd64-installer-firefox.run"
+AGENTCHROME="https://github.com/arduino/arduino-create-agent/releases/download/1.2.6/ArduinoCreateAgent-1.2.6-linux-amd64-installer-chrome.run"
 #
 # Script de instalação do Arduino IDE 2.0.x e do Fritzing no Linux Mint 20.1 Ulyssa, 20.2 Uma ou 20.3 Una 
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
@@ -226,6 +223,16 @@ echo -e "Fazendo o download do Arduino IDE 2.x do site Oficial, aguarde..."
 echo -e "Download do Arduino IDE 2.x do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
+echo -e "Fazendo o download do Arduino Agent Cloud do site Oficial, aguarde..."
+	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
+	# opção do comando wget: -v (verbose), -O (output-document)
+	# opção do comando chmod: -v (verbose), +x (execution)
+	sudo wget -v -O /tmp/firefox.run $AGENTFIREFOX &>> $LOG
+	sudo wget -v -O /tmp/chrome.run $AGENTCHROME &>> $LOG
+	sudo chmod -v +x /tmp/*.run &>> $LOG
+echo -e "Download do Arduino Agent Cloud do site Oficial feito com sucesso!!!, continuando com o script...\n"
+sleep 5
+#
 echo -e "Descompactando o Arduino IDE 2.x no diretório: /opt/arduino20, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando mv: -v (verbose)
@@ -234,6 +241,24 @@ echo -e "Descompactando o Arduino IDE 2.x no diretório: /opt/arduino20, aguarde
 		sudo mv -v arduino-*/ /opt/arduino20 &>> $LOG
 	cd - &>> $LOG
 echo -e "Descompactação do Arduino IDE 2.x no diretório /opt/arduino20 feito com sucesso!!!, continuando com o script...\n"
+sleep 5
+#
+echo -e "Instalando o Arduino Agent Cloud Firefox, aguarde..."
+	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
+	# opção do comando mv: -v (verbose)
+	cd /tmp
+		./firefox.run
+	cd - &>> $LOG
+echo -e "Instalando o Arduino Agent Cloud Firefox feito com sucesso!!!, continuando com o script...\n"
+sleep 5
+#
+echo -e "Instalando o Arduino Agent Cloud Google Chrome, aguarde..."
+	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
+	# opção do comando mv: -v (verbose)
+	cd /tmp
+		./chrome.run
+	cd - &>> $LOG
+echo -e "Instalando o Arduino Agent Cloud Google Chrome feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Criando o Link Simbólico do Arduino IDE 2.x no diretório: /bin, aguarde..."

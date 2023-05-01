@@ -89,8 +89,8 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 08/01/2023)
-ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.3_Linux_64bit.zip"
+# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 01/05/2023)
+ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.1.0_Linux_64bit.zip"
 ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
 AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-firefox.run"

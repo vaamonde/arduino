@@ -5,10 +5,10 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 08/01/2023
-# Versão: 0.08
-# Testado e homologado para a versão do Linux Mint 21 Vanessa e 21.1 Vera x64
-# Testado e homologado para a versão do Arduino IDE v2.0.x, Cli v0.26.x e Fritzing v0.9.x
+# Data de atualização: 24/07/2023
+# Versão: 0.09
+# Testado e homologado para a versão do Linux Mint 21 Vanessa, 21.1 Vera e 21.2 Victoria x64
+# Testado e homologado para a versão do Arduino IDE v2.1.x, Cli v0.33.x e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
 # projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma 
@@ -90,14 +90,15 @@ USUARIO=$(echo $USER)
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
 # Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 01/05/2023)
-ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.1.0_Linux_64bit.zip"
+ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.1.1_Linux_64bit.zip"
 ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
-AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-firefox.run"
-AGENTCHROME="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-chrome.run"
+AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.2/ArduinoCreateAgent-1.3.2-linux-amd64-installer.run"
+#AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-firefox.run"
+#AGENTCHROME="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-chrome.run"
 PATHARDUINO="/opt/arduino20"
 #
-# Script de instalação do Arduino IDE 2.0.x e do Fritzing no Linux Mint 21 Vanessa e 21.1 Vera x64
+# Script de instalação do Arduino IDE 2.1.x e do Fritzing no Linux Mint 21 Vanessa 21.1 Vera e 21.2 Victoria x64
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
 # $0 (variável de ambiente do nome do comando)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
@@ -133,7 +134,7 @@ sleep 5
 echo -e "Instalando as dependências desse script, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt install -y members git vim unzip python python2 python3 &>> $LOG
+	sudo apt install -y members git vim unzip python2 python3 &>> $LOG
 echo -e "Dependências instaladas com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -241,8 +242,10 @@ fi
 #
 echo -e "Fazendo o download do Arduino IDE 2.x e Cli do site Oficial, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
+	# opção do comando mkdir: -v (verbose)
 	# opção do comando wget: -v (verbose), -O (output-document)
-	sudo wget -v -O /tmp/arduino20.zip $ARDUINOIDE &>> $LOG
+	sudo mkdir -v /tmp/arduino-ide &>> $LOG
+	sudo wget -v -O /tmp/arduino-ide/arduino20.zip $ARDUINOIDE &>> $LOG
 	sudo wget -v -O /tmp/arduinocli.tar.gz $ARDUINOCLI &>> $LOG
 echo -e "Download do Arduino IDE 2.x do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
@@ -251,8 +254,9 @@ echo -e "Fazendo o download do Arduino Agent Cloud do site Oficial, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando wget: -v (verbose), -O (output-document)
 	# opção do comando chmod: -v (verbose), +x (execution)
-	sudo wget -v -O /tmp/firefox.run $AGENTFIREFOX &>> $LOG
-	sudo wget -v -O /tmp/chrome.run $AGENTCHROME &>> $LOG
+	#sudo wget -v -O /tmp/firefox.run $AGENTFIREFOX &>> $LOG
+	#sudo wget -v -O /tmp/chrome.run $AGENTCHROME &>> $LOG
+	sudo wget -v -O /tmp/agentarduino.run $AGENTARDUINO &>> $LOG
 	sudo chmod -v +x /tmp/*.run &>> $LOG
 echo -e "Download do Arduino Agent Cloud feito com sucesso!!!, continuando com o script...\n"
 sleep 5
@@ -261,38 +265,48 @@ echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, agu
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando mv: -v (verbose)
 	# opção do comando tar: -z (gzip), -x (extract), -v (verbose), -f (file)
-	cd /tmp
+	cd /tmp/arduino-ide/ 
 		sudo unzip arduino20.zip &>> $LOG
-		sudo mv -v arduino-*/ $PATHARDUINO &>> $LOG
+		cd ..
+		sudo mv -v arduino-ide $PATHARDUINO &>> $LOG
 		sudo tar -zxvf arduinocli.tar.gz &>> $LOG
 		sudo mv -v arduino-cli $PATHARDUINO &>> $LOG
 	cd - &>> $LOG
 echo -e "Descompactação do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
-echo -e "Instalando o Arduino Agent Cloud Firefox, aguarde..."
+#echo -e "Instalando o Arduino Agent Cloud Firefox, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando mv: -v (verbose)
-	cd /tmp
-		./firefox.run
-	cd - &>> $LOG
-echo -e "Instalação do Arduino Agent Cloud Firefox feito com sucesso!!!, continuando com o script...\n"
-sleep 5
+	#cd /tmp
+	#	./firefox.run
+	#cd - &>> $LOG
+#echo -e "Instalação do Arduino Agent Cloud Firefox feito com sucesso!!!, continuando com o script...\n"
+#sleep 5
 #
-echo -e "Instalando o Arduino Agent Cloud Chrome, aguarde..."
+#echo -e "Instalando o Arduino Agent Cloud Chrome, aguarde..."
+	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
+	# opção do comando mv: -v (verbose)
+	#cd /tmp
+	#	./chrome.run
+	#cd - &>> $LOG
+#echo -e "Instalação do Arduino Agent Cloud Chrome feito com sucesso!!!, continuando com o script...\n"
+#sleep 5
+#
+echo -e "Instalando o Arduino Agent Cloud, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando mv: -v (verbose)
 	cd /tmp
-		./chrome.run
+		./agentarduino.run
 	cd - &>> $LOG
-echo -e "Instalação do Arduino Agent Cloud Chrome feito com sucesso!!!, continuando com o script...\n"
+echo -e "Instalação do Arduino Agent Cloud feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
 echo -e "Criando os Links Simbólicos do Arduino IDE 2.x e Cli no diretório: /usr/local/bin/, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando ln: -s (symbolic), -v (verbose)
 	# opção do comando cp: -R (recursive), -f (force), -v (verbose)
-	sudo ln -sv $PATHARDUINO/arduino-ide /usr/local/bin/arduino-20 &>> $LOG
+	sudo ln -sv $PATHARDUINO/arduino-ide /usr/local/bin/arduino-ide &>> $LOG
 	sudo ln -sv $PATHARDUINO/arduino-cli /usr/local/bin/arduino-cli &>> $LOG
 	sudo cp -Rfv icons/ $PATHARDUINO &>> $LOG
 echo -e "Links Simbólicos do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"

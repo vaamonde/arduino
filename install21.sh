@@ -5,10 +5,10 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 24/07/2023
-# Versão: 0.09
+# Data de atualização: 12/11/2023
+# Versão: 0.10
 # Testado e homologado para a versão do Linux Mint 21 Vanessa, 21.1 Vera e 21.2 Victoria x64
-# Testado e homologado para a versão do Arduino IDE v2.1.x, Cli v0.33.x e Fritzing v0.9.x
+# Testado e homologado para a versão do Arduino IDE v2.2.x, Cli v0.35.x e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
 # projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma 
@@ -89,16 +89,16 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 01/05/2023)
-ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.1.1_Linux_64bit.zip"
+# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 12/11/2023)
+ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.2.1_Linux_64bit.zip"
 ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
-AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.2/ArduinoCreateAgent-1.3.2-linux-amd64-installer.run"
+AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.5/ArduinoCreateAgent-1.3.5-linux-amd64-installer.run"
 #AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-firefox.run"
 #AGENTCHROME="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-chrome.run"
 PATHARDUINO="/opt/arduino20"
 #
-# Script de instalação do Arduino IDE 2.1.x e do Fritzing no Linux Mint 21 Vanessa 21.1 Vera e 21.2 Victoria x64
+# Script de instalação do Arduino IDE 2.2.x e do Fritzing no Linux Mint 21 Vanessa 21.1 Vera e 21.2 Victoria x64
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
 # $0 (variável de ambiente do nome do comando)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)

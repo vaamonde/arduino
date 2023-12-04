@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
 # Data de atualização: 04/12/2023
-# Versão: 0.11
+# Versão: 0.12
 # Testado e homologado para a versão do Linux Mint 21 Vanessa, 21.1 Vera e 21.2 Victoria x64
 # Testado e homologado para a versão do Arduino IDE v2.2.x, Cli v0.34.x e Fritzing v0.9.x
 #
@@ -268,7 +268,7 @@ echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, agu
 	cd /tmp/arduino-ide/ 
 		sudo unzip arduino20.zip &>> $LOG
 		cd ..
-		sudo mv -v arduino-ide*/ $PATHARDUINO &>> $LOG
+		sudo mv -v arduino-ide*Linux*/ $PATHARDUINO &>> $LOG
 		sudo tar -zxvf arduinocli.tar.gz &>> $LOG
 		sudo mv -v arduino-cli $PATHARDUINO &>> $LOG
 	cd - &>> $LOG

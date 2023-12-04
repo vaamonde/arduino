@@ -8,7 +8,7 @@
 # Data de atualização: 12/11/2023
 # Versão: 0.10
 # Testado e homologado para a versão do Linux Mint 21 Vanessa, 21.1 Vera e 21.2 Victoria x64
-# Testado e homologado para a versão do Arduino IDE v2.2.x, Cli v0.35.x e Fritzing v0.9.x
+# Testado e homologado para a versão do Arduino IDE v2.2.x, Cli v0.34.x e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
 # projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma 
@@ -54,9 +54,9 @@
 #				bash install21.sh
 #
 # Terminal
-#		arduino-20
+#		arduino-21
 #
-# Arduino IDE 2.0.x
+# Arduino IDE 2.2.x
 #	Tools
 #		Board "Arduino Uno"
 #		Port: "/dev/ttyACM0"

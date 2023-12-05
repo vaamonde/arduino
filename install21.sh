@@ -267,10 +267,10 @@ echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, agu
 	# opção do comando tar: -z (gzip), -x (extract), -v (verbose), -f (file)
 	cd /tmp/arduino-ide/ 
 		sudo unzip arduino20.zip &>> $LOG
-		sudo mv -v arduino-ide*Linux*/ $PATHARDUINO &>> $LOG
+		sudo mv -v arduino-ide*/ $PATHARDUINO &>> $LOG
+	cd ..
 		sudo tar -zxvf arduinocli.tar.gz &>> $LOG
 		sudo mv -v arduino-cli $PATHARDUINO &>> $LOG
-	cd - &>> $LOG
 echo -e "Descompactação do Arduino IDE 2.x e Cli feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -297,7 +297,6 @@ echo -e "Instalando o Arduino Agent Cloud, aguarde..."
 	# opção do comando mv: -v (verbose)
 	cd /tmp
 		./agentarduino.run
-	cd - &>> $LOG
 echo -e "Instalação do Arduino Agent Cloud feito com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -321,6 +320,7 @@ sleep 5
 echo -e "Clonando o projeto do Fritzing Parts do Github, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	sudo git clone $FRITZING /usr/share/fritzing/parts &>> $LOG
+	cd ~/arduino/ &>> $LOG
 echo -e "Projeto do Fritzing Parts clonado com sucesso!!!, continuando com o script...\n"
 sleep 5
 #

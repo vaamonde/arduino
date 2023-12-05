@@ -267,7 +267,6 @@ echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, agu
 	# opção do comando tar: -z (gzip), -x (extract), -v (verbose), -f (file)
 	cd /tmp/arduino-ide/ 
 		sudo unzip arduino20.zip &>> $LOG
-		cd ..
 		sudo mv -v arduino-ide*Linux*/ $PATHARDUINO &>> $LOG
 		sudo tar -zxvf arduinocli.tar.gz &>> $LOG
 		sudo mv -v arduino-cli $PATHARDUINO &>> $LOG

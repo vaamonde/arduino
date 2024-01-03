@@ -1,4 +1,4 @@
-# Curso GRÁTIS de Arduino IDE, Cli e Web Editor no Linux Mint 20.x
+# Curso GRÁTIS de Arduino IDE, Cli, Cloud e Web Editor no Linux Mint 20.x e 21.x
 
 ## 💰 Ajude o projeto Bora para Prática a continuar fazendo vídeos e materiais gratuitos para o Canal do YouTUBE
 ## 💰 Chave PIX do projeto: robsonvaamonde@gmail.com

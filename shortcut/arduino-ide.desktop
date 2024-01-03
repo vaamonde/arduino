@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Exec=/opt/arduino20/arduino-ide
+Name=Arduino IDE
+Icon=/opt/arduino20/icons/256x256/apps/arduino.png
+Terminal=false
+StartupNotify=true

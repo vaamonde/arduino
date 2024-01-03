@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 04/12/2023
-# Versão: 0.12
+# Data de atualização: 03/01/2024
+# Versão: 0.13
 # Testado e homologado para a versão do Linux Mint 21 Vanessa, 21.1 Vera e 21.2 Victoria x64
 # Testado e homologado para a versão do Arduino IDE v2.2.x, Cli v0.34.x e Fritzing v0.9.x
 #
@@ -93,7 +93,7 @@ LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.2.1_Linux_64bit.zip"
 ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
-AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.5/ArduinoCreateAgent-1.3.5-linux-amd64-installer.run"
+AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.6/ArduinoCreateAgent-1.3.6-linux-amd64-installer.run"
 #AGENTFIREFOX="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-firefox.run"
 #AGENTCHROME="https://github.com/arduino/arduino-create-agent/releases/download/1.2.7/ArduinoCreateAgent-1.2.7-linux-amd64-installer-chrome.run"
 PATHARDUINO="/opt/arduino20"

@@ -5,10 +5,10 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 25/08/2021
-# Data de atualização: 03/01/2024
-# Versão: 0.14
+# Data de atualização: 24/03/2024
+# Versão: 0.15
 # Testado e homologado para a versão do Linux Mint 21 Vanessa, 21.1 Vera, 21.2 Victoria e 21.3 Virginia x64
-# Testado e homologado para a versão do Arduino IDE v2.2.x, Cli v0.34.x e Fritzing v0.9.x
+# Testado e homologado para a versão do Arduino IDE v2.3.x, Cli v0.34.x e Fritzing v0.9.x
 #
 # Arduino é uma plataforma de prototipagem eletrônica de hardware livre e de placa única, 
 # projetada com um microcontrolador Atmel AVR com suporte de entrada/saída embutido, uma 
@@ -93,10 +93,10 @@ USUARIO=$(echo $USER)
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
 # Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 12/11/2023)
-ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.2.1_Linux_64bit.zip"
+ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.2_Linux_64bit.zip"
 ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
-AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.6/ArduinoCreateAgent-1.3.6-linux-amd64-installer.run"
+AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.3.9/ArduinoCreateAgent-1.3.9-linux-amd64-installer.run"
 PATHARDUINO="/opt/arduino20"
 PATHSHORTCUT="/usr/share/applications"
 #

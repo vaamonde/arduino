@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 28/07/2024
-# Data de atualização: 28/07/2024
-# Versão: 0.01
+# Data de atualização: 27/10/2024
+# Versão: 0.02
 # Testado e homologado para a versão do Linux Mint 22 Wilma x64
 # Testado e homologado para a versão do Arduino IDE v2.x, Cli v0.34.x e Fritzing v0.9.x
 #
@@ -48,30 +48,30 @@
 # projeto no Linux Mint
 #
 # Ctrl+Alt+t (Atalho do Terminal)
-#		sudo apt install git
-#		git clone https://github.com/vaamonde/arduino
-#			cd arduino/
-#				bash install21.sh
+#   sudo apt install git
+#     git clone https://github.com/vaamonde/arduino
+#       cd arduino/
+#         bash install22.sh
 #
 # Terminal
-#		arduino-ide
+#   arduino-ide
 #
 # Arduino IDE 2.2.x
-#	Tools
-#		Board "Arduino Uno"
-#		Port: "/dev/ttyACM0"
-#		Get Board Info
+# Tools
+#   Board "Arduino Uno"
+#   Port: "/dev/ttyACM0"
+#   Get Board Info
 #
 # File
-#	Examples
-#		01. Basics
-#			Blink
-#				Upload
+# Examples
+#   01. Basics
+#     Blink
+#       Upload
 #
 # Terminal
-#	arduino-cli
-#		arduino-cli version
-#		arduino-cli board list
+# arduino-cli
+#   arduino-cli version
+#     arduino-cli board list
 #
 # Variável da localização da clonagem do script de instalação do Arduino IDE
 PATHINSTALL=$(pwd)
@@ -92,15 +92,15 @@ USUARIO=$(echo $USER)
 # opção da variável de ambiente $0: nome do comando ou script digitado
 LOG="$HOME/$(echo $0 | cut -d'/' -f2)"
 #
-# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 28/07/2024)
-ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.2_Linux_64bit.zip"
+# Declarando as variáveis de download do Arduino IDE, Cli e do Fritzing (Links atualizados no dia 27/10/2024)
+ARDUINOIDE="https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.3_Linux_64bit.zip"
 ARDUINOCLI="https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz"
 FRITZING="https://github.com/fritzing/fritzing-parts.git"
-AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.6.0/ArduinoCloudAgent-1.6.0-linux-amd64-installer.run"
-PATHARDUINO="/opt/arduino20"
+AGENTARDUINO="https://github.com/arduino/arduino-create-agent/releases/download/1.6.1/ArduinoCloudAgent-1.6.1-linux-amd64-installer.run"
+PATHARDUINO="/opt/arduino"
 PATHSHORTCUT="/usr/share/applications"
 #
-# Script de instalação do Arduino IDE 2.x e do Fritzing no Linux Mint 21 Wilma x64
+# Script de instalação do Arduino IDE 2.x e do Fritzing no Linux Mint 22 Wilma x64
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
 # $0 (variável de ambiente do nome do comando)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
@@ -136,7 +136,7 @@ sleep 5
 echo -e "Instalando as dependências desse script, aguarde..."
 	# opção do redirecionador &>>: Redireciona a saída padrão (STDOUT) anexando
 	# opção do comando apt: -y (yes)
-	sudo apt install -y members git vim unzip python2 python3 &>> $LOG
+	sudo apt install -y members git vim unzip python3 &>> $LOG
 echo -e "Dependências instaladas com sucesso!!!, continuando com o script...\n"
 sleep 5
 #
@@ -247,7 +247,7 @@ echo -e "Fazendo o download do Arduino IDE 2.x e Cli do site Oficial, aguarde...
 	# opção do comando mkdir: -v (verbose)
 	# opção do comando wget: -v (verbose), -O (output-document)
 	sudo mkdir -v /tmp/arduino-ide &>> $LOG
-	sudo wget -v -O /tmp/arduino-ide/arduino20.zip $ARDUINOIDE &>> $LOG
+	sudo wget -v -O /tmp/arduino-ide/arduino.zip $ARDUINOIDE &>> $LOG
 	sudo wget -v -O /tmp/arduinocli.tar.gz $ARDUINOCLI &>> $LOG
 echo -e "Download do Arduino IDE 2.x do site Oficial feito com sucesso!!!, continuando com o script...\n"
 sleep 5
@@ -267,7 +267,7 @@ echo -e "Descompactando o Arduino IDE 2.x e Cli no diretório: $PATHARDUINO, agu
 	# opção do comando cp: -R (recursive), -v (verbose)
 	# opção do comando tar: -z (gzip), -x (extract), -v (verbose), -f (file)
 	cd /tmp/arduino-ide/ 
-		sudo unzip arduino20.zip &>> $LOG
+		sudo unzip arduino.zip &>> $LOG
 		sudo mv -v arduino-ide*/ $PATHARDUINO &>> $LOG
 		sudo cp -Rv $PATHINSTALL/icons $PATHARDUINO &>> $LOG
 		sudo cp -v $PATHINSTALL/shortcut/arduino-ide.desktop $PATHSHORTCUT &>> $LOG
